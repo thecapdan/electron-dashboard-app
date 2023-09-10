@@ -45,12 +45,9 @@ const subHeaderStyle = {
 };
 
 const getWeatherDataPoints = (data: WeatherData) => {
-  // Assuming you are receiving a single WeatherData object, not an array
-
   const today = data.list[0];
   const tomorrow = data.list[1];
 
-  // Create an object with the desired format
   const weatherDataPoints = {
     temperatureToday9am: Math.round(today.main.temp),
     likelihoodOfRainToday9am: Math.round(today.pop),
@@ -123,7 +120,7 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
           }
         }
 
-        // If cached data is not available or is older than 1 hour, fetch new data
+        // If cached data is not available or is older than 4 hour, fetch new data
         console.log("FETCHING DATA");
         const response = await fetch(
           `https://api.openweathermap.org/data/2.5/forecast?q=London,GB&appid=${apiKey}&units=metric` // Request temperature in Celsius
@@ -149,7 +146,7 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
         setErrorMessage(null);
       } catch (error) {
         setIsLoading(false);
-        setErrorMessage("API request not authorized"); // You can customize this message
+        setErrorMessage("API request not authorized");
       }
     }
 
