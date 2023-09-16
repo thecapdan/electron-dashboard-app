@@ -8,7 +8,7 @@ import {
   iconImageMap,
 } from "./weather-utils";
 
-import { tableStyle } from "./weather-utils";
+import { tableStyle } from "../../common/styles";
 
 interface SummaryCellProps {
   temperature: number;

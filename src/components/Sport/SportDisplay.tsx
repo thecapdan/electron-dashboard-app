@@ -1,22 +1,61 @@
-import React from "react";
-import { Card, CardContent } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Card, CardContent, CircularProgress, Typography } from "@mui/material";
+import { TableCell, Table, TableRow } from "@mui/material";
+import SummaryCell from "./SummaryCell";
 
 interface SportDisplayProps {
   summary: boolean;
+  collapsed?: boolean;
 }
 
-const SportDisplay: React.FC<SportDisplayProps> = ({ summary }) => {
+const SportDisplay: React.FC<SportDisplayProps> = ({
+  summary,
+  collapsed = false,
+}) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    setIsLoading(false);
+  });
+
   return (
     <Card>
-      <CardContent>
+      <CardContent style={{ width: "100%" }}>
         {summary ? (
-          <div>
-            <h4>Sport Summary</h4>
-          </div>
+          <>
+            {summary && !collapsed ? (
+              <div style={{ textAlign: "center" }}>
+                <h4>Football Fixtures</h4>
+              </div>
+            ) : (
+              <Table>
+                <TableRow>
+                  <TableCell>
+                    <h4>Football Fixtures</h4>
+                  </TableCell>
+                  <SummaryCell />
+                  <SummaryCell />
+                </TableRow>
+              </Table>
+            )}
+          </>
         ) : (
-          <div>
-            <h4>Sport Content</h4>
-          </div>
+          <>
+            {isLoading ? (
+              <div className="loading-spinner">
+                <CircularProgress />
+              </div>
+            ) : errorMessage ? (
+              <div className="error-message">
+                <Typography variant="body1" color="error">
+                  {errorMessage}
+                </Typography>
+              </div>
+            ) : (
+              <></>
+            )}
+          </>
         )}
       </CardContent>
     </Card>

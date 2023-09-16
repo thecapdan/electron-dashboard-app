@@ -5,8 +5,8 @@ import coatImage from "../../resources/coat.png";
 import hoodyImage from "../../resources/hoody.png";
 import tShirtImage from "../../resources/tshirt.png";
 
-import { getClothing, tableStyle } from "./weather-utils";
-
+import { getClothing } from "./weather-utils";
+import { tableStyle } from "../../common/styles";
 interface TemperatureCellProps {
   temperature: number;
 }

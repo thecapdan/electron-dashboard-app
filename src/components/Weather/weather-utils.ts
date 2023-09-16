@@ -49,4 +49,4 @@ const tableStyle = {
   img: { width: 30, height: 30 },
 };
 
-export { getClothing, getIcon, clothingImageMap, iconImageMap, tableStyle };
+export { getClothing, getIcon, clothingImageMap, iconImageMap };

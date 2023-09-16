@@ -18,7 +18,7 @@ export default function App() {
     };
 
   return (
-    <div>
+    <div style={{ width: "800px", height: "800px" }}>
       <AppBar position="static">
         <Toolbar sx={{ justifyContent: "center" }}>
           <Typography variant="h4" component="div" sx={{ flexGrow: 0 }}>
@@ -42,14 +42,24 @@ export default function App() {
         expanded={expandedAccordion === "sport"}
         onChange={handleAccordionChange("sport")}
         panelKey="sport"
-        summaryContent={<SportDisplay summary={true} />}
+        summaryContent={
+          <SportDisplay
+            summary={true}
+            collapsed={expandedAccordion !== "sport"}
+          />
+        }
         detailsContent={<SportDisplay summary={false} />}
       />
       <AccordionRow
         expanded={expandedAccordion === "travel"}
         onChange={handleAccordionChange("travel")}
         panelKey="travel"
-        summaryContent={<TravelDisplay summary={true} />}
+        summaryContent={
+          <TravelDisplay
+            summary={true}
+            collapsed={expandedAccordion !== "travel"}
+          />
+        }
         detailsContent={<TravelDisplay summary={false} />}
       />
     </div>

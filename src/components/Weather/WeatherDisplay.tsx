@@ -10,7 +10,7 @@ import {
   TableHead,
 } from "@mui/material";
 
-import { tableStyle } from "./weather-utils";
+import { tableStyle } from "../../common/styles";
 
 import TemperatureCell from "./TemperatureCell";
 import RainCell from "./RainCell";
@@ -157,16 +157,18 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
 
   return (
     <Card>
-      <CardContent style={{ minWidth: "1000px" }}>
+      <CardContent style={{ width: "100%" }}>
         {summary ? (
           summary && !collapsed ? (
             <div style={{ textAlign: "center" }}>
-              <h1>Weather Forecast</h1>
+              <h4>Weather Forecast</h4>
             </div>
           ) : (
             <Table>
               <TableRow>
-                <TableCell>Temp</TableCell>
+                <TableCell>
+                  <h4>Weather Forecast</h4>
+                </TableCell>
                 <SummaryCell
                   temperature={weatherData.temperatureToday9am ?? NaN}
                   percentageChance={weatherData.likelihoodOfRainToday9am ?? NaN}

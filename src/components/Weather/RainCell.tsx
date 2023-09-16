@@ -5,7 +5,9 @@ import sunglassesImage from "../../resources/sunglasses.png";
 import capImage from "../../resources/cap.png";
 import umbrellaImage from "../../resources/tshirt.png";
 
-import { getIcon, tableStyle } from "./weather-utils";
+import { getIcon } from "./weather-utils";
+
+import { tableStyle } from "../../common/styles";
 
 interface RainCellProps {
   percentageChance: number;
