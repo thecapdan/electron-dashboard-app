@@ -44,9 +44,4 @@ const iconImageMap: Record<string, string> = {
   umbrella: umbrellaImage,
 };
 
-const tableStyle = {
-  cell: { fontSize: 24, fontFamily: "inherit", textAlign: "center" },
-  img: { width: 30, height: 30 },
-};
-
 export { getClothing, getIcon, clothingImageMap, iconImageMap };

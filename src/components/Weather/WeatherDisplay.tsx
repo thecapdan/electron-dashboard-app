@@ -90,6 +90,17 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
 
   useEffect(() => {
     async function fetchWeatherData() {
+      if (apiKey === undefined || process.env.REACT_APP_USE_MOCKS === "true") {
+        console.log("--useMocks set");
+        let londonData = mockData;
+        let dataPoints = getWeatherDataPoints(londonData);
+        setWeatherData(dataPoints);
+
+        setIsLoading(false);
+        setErrorMessage(null);
+        return;
+      }
+
       try {
         const cachedWeatherData = localStorage.getItem("weatherData");
         const cachedTimestamp = localStorage.getItem("weatherTimestamp");
@@ -121,7 +132,7 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
         }
 
         // If cached data is not available or is older than 4 hour, fetch new data
-        console.log("FETCHING DATA");
+        console.log("FETCHING WEATHER DATA");
         const response = await fetch(
           `https://api.openweathermap.org/data/2.5/forecast?q=London,GB&appid=${apiKey}&units=metric` // Request temperature in Celsius
         );
@@ -165,35 +176,41 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
             </div>
           ) : (
             <Table>
-              <TableRow>
-                <TableCell>
-                  <h4>Weather Forecast</h4>
-                </TableCell>
-                <SummaryCell
-                  temperature={weatherData.temperatureToday9am ?? NaN}
-                  percentageChance={weatherData.likelihoodOfRainToday9am ?? NaN}
-                  time="Today  (am)"
-                />
-                <SummaryCell
-                  time="Today  (am)"
-                  temperature={weatherData.temperatureToday4pm ?? NaN}
-                  percentageChance={weatherData.likelihoodOfRainToday4pm ?? NaN}
-                />
-                <SummaryCell
-                  time="Tomorrow  (am)"
-                  temperature={weatherData.temperatureTomorrow9am ?? NaN}
-                  percentageChance={
-                    weatherData.likelihoodOfRainTomorrow9am ?? NaN
-                  }
-                />
-                <SummaryCell
-                  time="Tomorrow  (pm)"
-                  temperature={weatherData.temperatureTomorrow4pm ?? NaN}
-                  percentageChance={
-                    weatherData.likelihoodOfRainTomorrow4pm ?? NaN
-                  }
-                />
-              </TableRow>
+              <TableBody>
+                <TableRow>
+                  <TableCell>
+                    <h4>Weather Forecast</h4>
+                  </TableCell>
+                  <SummaryCell
+                    temperature={weatherData.temperatureToday9am ?? NaN}
+                    percentageChance={
+                      weatherData.likelihoodOfRainToday9am ?? NaN
+                    }
+                    time="Today  (am)"
+                  />
+                  <SummaryCell
+                    time="Today  (am)"
+                    temperature={weatherData.temperatureToday4pm ?? NaN}
+                    percentageChance={
+                      weatherData.likelihoodOfRainToday4pm ?? NaN
+                    }
+                  />
+                  <SummaryCell
+                    time="Tomorrow  (am)"
+                    temperature={weatherData.temperatureTomorrow9am ?? NaN}
+                    percentageChance={
+                      weatherData.likelihoodOfRainTomorrow9am ?? NaN
+                    }
+                  />
+                  <SummaryCell
+                    time="Tomorrow  (pm)"
+                    temperature={weatherData.temperatureTomorrow4pm ?? NaN}
+                    percentageChance={
+                      weatherData.likelihoodOfRainTomorrow4pm ?? NaN
+                    }
+                  />
+                </TableRow>
+              </TableBody>
             </Table>
           )
         ) : (

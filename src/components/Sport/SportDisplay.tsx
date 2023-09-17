@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CircularProgress, Typography } from "@mui/material";
-import { TableCell, Table, TableRow } from "@mui/material";
+import { TableCell, Table, TableBody, TableRow } from "@mui/material";
 import SummaryCell from "./SummaryCell";
 
 interface SportDisplayProps {
@@ -30,13 +30,15 @@ const SportDisplay: React.FC<SportDisplayProps> = ({
               </div>
             ) : (
               <Table>
-                <TableRow>
-                  <TableCell>
-                    <h4>Football Fixtures</h4>
-                  </TableCell>
-                  <SummaryCell />
-                  <SummaryCell />
-                </TableRow>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>
+                      <h4>Football Fixtures</h4>
+                    </TableCell>
+                    <SummaryCell />
+                    <SummaryCell />
+                  </TableRow>
+                </TableBody>
               </Table>
             )}
           </>
