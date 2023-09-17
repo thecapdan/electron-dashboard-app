@@ -35,26 +35,26 @@ const TravelDisplay: React.FC<TravelDisplayProps> = ({
         const cachedTravelData = localStorage.getItem("travelData");
         const cachedTimestamp = localStorage.getItem("travelTimestamp");
 
-        if (cachedTravelData && cachedTimestamp) {
-          const currentTime = new Date().getTime();
-          const lastFetchTime = new Date(parseInt(cachedTimestamp)).getTime();
-          const timeDifferenceInHours =
-            (currentTime - lastFetchTime) / (1000 * 60 * 60);
+        // if (cachedTravelData && cachedTimestamp) {
+        //   const currentTime = new Date().getTime();
+        //   const lastFetchTime = new Date(parseInt(cachedTimestamp)).getTime();
+        //   const timeDifferenceInHours =
+        //     (currentTime - lastFetchTime) / (1000 * 60 * 60);
 
-          if (timeDifferenceInHours < 1) {
-            const parsedData = JSON.parse(cachedTravelData);
-            console.log(parsedData);
-            handleStatusUpdate(parsedData);
+        //   if (timeDifferenceInHours < 1) {
+        //     const parsedData = JSON.parse(cachedTravelData);
+        //     console.log(parsedData);
+        //     handleStatusUpdate(parsedData);
 
-            setIsLoading(false);
-            setErrorMessage(null);
-            return;
-          }
-        }
+        //     setIsLoading(false);
+        //     setErrorMessage(null);
+        //     return;
+        //   }
+        // }
 
         console.log("FETCHING TRAVEL DATA");
         const response = await fetch(
-          `https://api.tfl.gov.uk/line/mode/tube,dlr/status`
+          `https://api.tfl.gov.uk/line/mode/tube,dlr,elizabeth-line/status`
         );
 
         if (!response.ok) {
@@ -85,6 +85,12 @@ const TravelDisplay: React.FC<TravelDisplayProps> = ({
             } else if (line.id === "jubilee") {
               lineStatuses.push({
                 name: "jubilee",
+                status: line.lineStatuses[0].statusSeverityDescription,
+                disruption: line.lineStatuses[0].disruption,
+              });
+            } else if (line.id === "elizabeth") {
+              lineStatuses.push({
+                name: "elizabeth",
                 status: line.lineStatuses[0].statusSeverityDescription,
                 disruption: line.lineStatuses[0].disruption,
               });
@@ -130,6 +136,7 @@ const TravelDisplay: React.FC<TravelDisplayProps> = ({
                     </TableCell>
                     <SummaryCell lineStatus={statuses[0]} />
                     <SummaryCell lineStatus={statuses[1]} />
+                    <SummaryCell lineStatus={statuses[2]} />
                   </TableRow>
                 </TableBody>
               </Table>
