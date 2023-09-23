@@ -16,5 +16,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "react-open-weather.d.ts"]
+  "include": ["src"]
 }

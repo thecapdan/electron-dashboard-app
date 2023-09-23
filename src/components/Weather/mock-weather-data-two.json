@@ -1,0 +1,628 @@
+{
+  "location": {
+    "name": "London",
+    "region": "City of London, Greater London",
+    "country": "United Kingdom",
+    "lat": 51.52,
+    "lon": -0.11,
+    "tz_id": "Europe/London",
+    "localtime_epoch": 1695470465,
+    "localtime": "2023-09-23 13:01"
+  },
+  "current": {
+    "last_updated_epoch": 1695469500,
+    "last_updated": "2023-09-23 12:45",
+    "temp_c": 17.0,
+    "temp_f": 62.6,
+    "is_day": 1,
+    "condition": {
+      "text": "Partly cloudy",
+      "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
+      "code": 1003
+    },
+    "wind_mph": 8.1,
+    "precip_mm": 0.0,
+    "cloud": 25,
+    "gust_mph": 9.5
+  },
+  "forecast": {
+    "forecastday": [
+      {
+        "date": "2023-09-23",
+        "date_epoch": 1695427200,
+        "day": {
+          "maxtemp_c": 17.6,
+          "maxtemp_f": 63.6,
+          "mintemp_c": 10.0,
+          "mintemp_f": 50.0,
+          "avgtemp_c": 13.6,
+          "avgtemp_f": 56.5,
+          "maxwind_mph": 8.9,
+          "totalprecip_mm": 0.0,
+          "totalsnow_cm": 0.0,
+          "daily_will_it_rain": 0,
+          "daily_chance_of_rain": 0,
+          "condition": {
+            "text": "Partly cloudy",
+            "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
+            "code": 1003
+          }
+        },
+        "astro": {
+          "sunrise": "06:47 AM",
+          "sunset": "06:57 PM",
+          "moonrise": "04:31 PM",
+          "moonset": "11:11 PM",
+          "moon_phase": "Waxing Gibbous",
+          "moon_illumination": "52",
+          "is_moon_up": 0,
+          "is_sun_up": 0
+        },
+        "hour": [
+          {
+            "time_epoch": 1695456000,
+            "time": "2023-09-23 09:00",
+            "temp_c": 13.9,
+            "temp_f": 57.0,
+            "is_day": 1,
+            "condition": {
+              "text": "Sunny",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/113.png",
+              "code": 1000
+            },
+            "wind_mph": 5.8,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 6.9
+          },
+          {
+            "time_epoch": 1695459600,
+            "time": "2023-09-23 10:00",
+            "temp_c": 15.2,
+            "temp_f": 59.4,
+            "is_day": 1,
+            "condition": {
+              "text": "Sunny",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/113.png",
+              "code": 1000
+            },
+            "wind_mph": 7.6,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 8.7
+          },
+          {
+            "time_epoch": 1695463200,
+            "time": "2023-09-23 11:00",
+            "temp_c": 16.1,
+            "temp_f": 61.0,
+            "is_day": 1,
+            "condition": {
+              "text": "Sunny",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/113.png",
+              "code": 1000
+            },
+            "wind_mph": 7.6,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 8.7
+          },
+          {
+            "time_epoch": 1695466800,
+            "time": "2023-09-23 12:00",
+            "temp_c": 17.0,
+            "temp_f": 62.6,
+            "is_day": 1,
+            "condition": {
+              "text": "Partly cloudy",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
+              "code": 1003
+            },
+            "wind_mph": 8.1,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 9.5
+          },
+          {
+            "time_epoch": 1695470400,
+            "time": "2023-09-23 13:00",
+            "temp_c": 17.2,
+            "temp_f": 63.0,
+            "is_day": 1,
+            "condition": {
+              "text": "Partly cloudy",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
+              "code": 1003
+            },
+            "wind_mph": 7.8,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 9.0
+          },
+          {
+            "time_epoch": 1695474000,
+            "time": "2023-09-23 14:00",
+            "temp_c": 17.6,
+            "temp_f": 63.6,
+            "is_day": 1,
+            "condition": {
+              "text": "Partly cloudy",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
+              "code": 1003
+            },
+            "wind_mph": 8.3,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 9.5
+          },
+          {
+            "time_epoch": 1695477600,
+            "time": "2023-09-23 15:00",
+            "temp_c": 17.6,
+            "temp_f": 63.6,
+            "is_day": 1,
+            "condition": {
+              "text": "Partly cloudy",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
+              "code": 1003
+            },
+            "wind_mph": 8.9,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 10.3
+          },
+          {
+            "time_epoch": 1695481200,
+            "time": "2023-09-23 16:00",
+            "temp_c": 17.1,
+            "temp_f": 62.8,
+            "is_day": 1,
+            "condition": {
+              "text": "Partly cloudy",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
+              "code": 1003
+            },
+            "wind_mph": 8.7,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 10.9
+          },
+          {
+            "time_epoch": 1695484800,
+            "time": "2023-09-23 17:00",
+            "temp_c": 16.4,
+            "temp_f": 61.6,
+            "is_day": 1,
+            "condition": {
+              "text": "Partly cloudy",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
+              "code": 1003
+            },
+            "wind_mph": 6.7,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 9.3
+          },
+          {
+            "time_epoch": 1695488400,
+            "time": "2023-09-23 18:00",
+            "temp_c": 15.0,
+            "temp_f": 59.1,
+            "is_day": 1,
+            "condition": {
+              "text": "Partly cloudy",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
+              "code": 1003
+            },
+            "wind_mph": 7.2,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 11.0
+          },
+          {
+            "time_epoch": 1695492000,
+            "time": "2023-09-23 19:00",
+            "temp_c": 14.2,
+            "temp_f": 57.5,
+            "is_day": 0,
+            "condition": {
+              "text": "Clear",
+              "icon": "//cdn.weatherapi.com/weather/64x64/night/113.png",
+              "code": 1000
+            },
+            "wind_mph": 8.5,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 12.4
+          },
+          {
+            "time_epoch": 1695495600,
+            "time": "2023-09-23 20:00",
+            "temp_c": 13.6,
+            "temp_f": 56.4,
+            "is_day": 0,
+            "condition": {
+              "text": "Clear",
+              "icon": "//cdn.weatherapi.com/weather/64x64/night/113.png",
+              "code": 1000
+            },
+            "wind_mph": 7.4,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 11.1
+          },
+          {
+            "time_epoch": 1695499200,
+            "time": "2023-09-23 21:00",
+            "temp_c": 13.3,
+            "temp_f": 56.0,
+            "is_day": 0,
+            "condition": {
+              "text": "Clear",
+              "icon": "//cdn.weatherapi.com/weather/64x64/night/113.png",
+              "code": 1000
+            },
+            "wind_mph": 6.0,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 9.4
+          },
+          {
+            "time_epoch": 1695502800,
+            "time": "2023-09-23 22:00",
+            "temp_c": 13.0,
+            "temp_f": 55.4,
+            "is_day": 0,
+            "condition": {
+              "text": "Clear",
+              "icon": "//cdn.weatherapi.com/weather/64x64/night/113.png",
+              "code": 1000
+            },
+            "wind_mph": 6.0,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 9.7
+          },
+          {
+            "time_epoch": 1695506400,
+            "time": "2023-09-23 23:00",
+            "temp_c": 12.9,
+            "temp_f": 55.2,
+            "is_day": 0,
+            "condition": {
+              "text": "Clear",
+              "icon": "//cdn.weatherapi.com/weather/64x64/night/113.png",
+              "code": 1000
+            },
+            "wind_mph": 6.5,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 10.4
+          }
+        ]
+      },
+      {
+        "date": "2023-09-24",
+        "date_epoch": 1695513600,
+        "day": {
+          "maxtemp_c": 19.5,
+          "maxtemp_f": 67.1,
+          "mintemp_c": 13.0,
+          "mintemp_f": 55.3,
+          "avgtemp_c": 16.6,
+          "avgtemp_f": 61.9,
+          "maxwind_mph": 15.2,
+          "totalprecip_mm": 0.0,
+          "totalsnow_cm": 0.0,
+          "daily_will_it_rain": 0,
+          "daily_chance_of_rain": 0,
+          "condition": {
+            "text": "Overcast",
+            "icon": "//cdn.weatherapi.com/weather/64x64/day/122.png",
+            "code": 1009
+          }
+        },
+        "astro": {
+          "sunrise": "06:49 AM",
+          "sunset": "06:55 PM",
+          "moonrise": "05:16 PM",
+          "moonset": "No moonset",
+          "moon_phase": "Waxing Gibbous",
+          "moon_illumination": "63",
+          "is_moon_up": 0,
+          "is_sun_up": 0
+        },
+        "hour": [
+          {
+            "time_epoch": 1695510000,
+            "time": "2023-09-24 00:00",
+            "temp_c": 13.0,
+            "temp_f": 55.3,
+            "is_day": 0,
+            "condition": {
+              "text": "Clear",
+              "icon": "//cdn.weatherapi.com/weather/64x64/night/113.png",
+              "code": 1000
+            },
+            "wind_mph": 7.2,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 11.4
+          },
+          {
+            "time_epoch": 1695513600,
+            "time": "2023-09-24 01:00",
+            "temp_c": 13.2,
+            "temp_f": 55.7,
+            "is_day": 0,
+            "condition": {
+              "text": "Partly cloudy",
+              "icon": "//cdn.weatherapi.com/weather/64x64/night/116.png",
+              "code": 1003
+            },
+            "wind_mph": 7.4,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 11.9
+          },
+          {
+            "time_epoch": 1695517200,
+            "time": "2023-09-24 02:00",
+            "temp_c": 13.3,
+            "temp_f": 56.0,
+            "is_day": 0,
+            "condition": {
+              "text": "Partly cloudy",
+              "icon": "//cdn.weatherapi.com/weather/64x64/night/116.png",
+              "code": 1003
+            },
+            "wind_mph": 8.1,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 13.4
+          },
+          {
+            "time_epoch": 1695520800,
+            "time": "2023-09-24 03:00",
+            "temp_c": 13.9,
+            "temp_f": 57.0,
+            "is_day": 0,
+            "condition": {
+              "text": "Partly cloudy",
+              "icon": "//cdn.weatherapi.com/weather/64x64/night/116.png",
+              "code": 1003
+            },
+            "wind_mph": 8.7,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 14.0
+          },
+          {
+            "time_epoch": 1695524400,
+            "time": "2023-09-24 04:00",
+            "temp_c": 13.9,
+            "temp_f": 57.0,
+            "is_day": 0,
+            "condition": {
+              "text": "Overcast",
+              "icon": "//cdn.weatherapi.com/weather/64x64/night/122.png",
+              "code": 1009
+            },
+            "wind_mph": 9.4,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 15.6
+          },
+          {
+            "time_epoch": 1695528000,
+            "time": "2023-09-24 05:00",
+            "temp_c": 14.2,
+            "temp_f": 57.5,
+            "is_day": 0,
+            "condition": {
+              "text": "Overcast",
+              "icon": "//cdn.weatherapi.com/weather/64x64/night/122.png",
+              "code": 1009
+            },
+            "wind_mph": 10.5,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 17.0
+          },
+          {
+            "time_epoch": 1695531600,
+            "time": "2023-09-24 06:00",
+            "temp_c": 14.7,
+            "temp_f": 58.5,
+            "is_day": 0,
+            "condition": {
+              "text": "Overcast",
+              "icon": "//cdn.weatherapi.com/weather/64x64/night/122.png",
+              "code": 1009
+            },
+            "wind_mph": 11.0,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 16.9
+          },
+          {
+            "time_epoch": 1695535200,
+            "time": "2023-09-24 07:00",
+            "temp_c": 15.1,
+            "temp_f": 59.2,
+            "is_day": 1,
+            "condition": {
+              "text": "Cloudy",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/119.png",
+              "code": 1006
+            },
+            "wind_mph": 11.4,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 17.0
+          },
+          {
+            "time_epoch": 1695538800,
+            "time": "2023-09-24 08:00",
+            "temp_c": 15.6,
+            "temp_f": 60.1,
+            "is_day": 1,
+            "condition": {
+              "text": "Cloudy",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/119.png",
+              "code": 1006
+            },
+            "wind_mph": 11.4,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 16.4
+          },
+          {
+            "time_epoch": 1695542400,
+            "time": "2023-09-24 09:00",
+            "temp_c": 16.8,
+            "temp_f": 62.2,
+            "is_day": 1,
+            "condition": {
+              "text": "Cloudy",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/119.png",
+              "code": 1006
+            },
+            "wind_mph": 12.1,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 15.8
+          },
+          {
+            "time_epoch": 1695546000,
+            "time": "2023-09-24 10:00",
+            "temp_c": 18.2,
+            "temp_f": 64.7,
+            "is_day": 1,
+            "condition": {
+              "text": "Overcast",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              "code": 1009
+            },
+            "wind_mph": 13.4,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 15.9
+          },
+          {
+            "time_epoch": 1695549600,
+            "time": "2023-09-24 11:00",
+            "temp_c": 19.0,
+            "temp_f": 66.3,
+            "is_day": 1,
+            "condition": {
+              "text": "Overcast",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              "code": 1009
+            },
+            "wind_mph": 14.8,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 17.0
+          },
+          {
+            "time_epoch": 1695553200,
+            "time": "2023-09-24 12:00",
+            "temp_c": 19.4,
+            "temp_f": 67.0,
+            "is_day": 1,
+            "condition": {
+              "text": "Overcast",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/122.png",
+              "code": 1009
+            },
+            "wind_mph": 14.3,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 16.5
+          },
+          {
+            "time_epoch": 1695556800,
+            "time": "2023-09-24 13:00",
+            "temp_c": 19.5,
+            "temp_f": 67.1,
+            "is_day": 1,
+            "condition": {
+              "text": "Cloudy",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/119.png",
+              "code": 1006
+            },
+            "wind_mph": 14.8,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 17.0
+          },
+          {
+            "time_epoch": 1695560400,
+            "time": "2023-09-24 14:00",
+            "temp_c": 19.5,
+            "temp_f": 67.1,
+            "is_day": 1,
+            "condition": {
+              "text": "Partly cloudy",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
+              "code": 1003
+            },
+            "wind_mph": 15.2,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 17.5
+          },
+          {
+            "time_epoch": 1695564000,
+            "time": "2023-09-24 15:00",
+            "temp_c": 19.1,
+            "temp_f": 66.4,
+            "is_day": 1,
+            "condition": {
+              "text": "Sunny",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/113.png",
+              "code": 1000
+            },
+            "wind_mph": 14.8,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 17.0
+          },
+          {
+            "time_epoch": 1695567600,
+            "time": "2023-09-24 16:00",
+            "temp_c": 18.5,
+            "temp_f": 65.3,
+            "is_day": 1,
+            "condition": {
+              "text": "Sunny",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/113.png",
+              "code": 1000
+            },
+            "wind_mph": 13.4,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 16.5
+          },
+          {
+            "time_epoch": 1695571200,
+            "time": "2023-09-24 17:00",
+            "temp_c": 17.9,
+            "temp_f": 64.2,
+            "is_day": 1,
+            "condition": {
+              "text": "Sunny",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/113.png",
+              "code": 1000
+            },
+            "wind_mph": 13.2,
+            "will_it_rain": 0,
+            "chance_of_rain": 0,
+            "gust_mph": 18.1
+          }
+        ]
+      }
+    ]
+  }
+}

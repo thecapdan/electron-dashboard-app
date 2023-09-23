@@ -18,23 +18,11 @@ import SummaryCell from "./SummaryCell";
 
 import { CircularProgress } from "@mui/material";
 
-const mockData = require("./mock-weather-data.json");
+import { transformWeatherData } from "./weather-utils";
 
-interface WeatherData {
-  cod: string;
-  message: number;
-  cnt: number;
-  list: {
-    dt: number;
-    main: {
-      temp: number;
-    };
-    pop: number;
-  }[];
-}
+const mockData = require("./mock-weather-data-two.json");
 
-const apiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
-
+const apiKey = process.env.REACT_WEATHER_API_KEY;
 interface WeatherDisplayProps {
   summary: boolean;
   collapsed?: boolean;
@@ -44,46 +32,49 @@ const subHeaderStyle = {
   textAlign: "center",
 };
 
-const getWeatherDataPoints = (data: WeatherData) => {
-  const today = data.list[0];
-  const tomorrow = data.list[1];
-
-  const weatherDataPoints = {
-    temperatureToday9am: Math.round(today.main.temp),
-    likelihoodOfRainToday9am: Math.round(today.pop),
-    temperatureToday4pm: Math.round(data.list[3].main.temp),
-    likelihoodOfRainToday4pm: Math.round(data.list[3].pop),
-    temperatureTomorrow9am: Math.round(tomorrow.main.temp),
-    likelihoodOfRainTomorrow9am: Math.round(tomorrow.pop),
-    temperatureTomorrow4pm: Math.round(data.list[7].main.temp),
-    likelihoodOfRainTomorrow4pm: Math.round(data.list[7].pop),
+type WeatherDataPoints = {
+  today9am: {
+    temperature: number | null;
+    percentageChanceOfRain: number | null;
   };
-
-  return weatherDataPoints;
+  today4pm: {
+    temperature: number | null;
+    percentageChanceOfRain: number | null;
+  };
+  tomorrow9am: {
+    temperature: number | null;
+    percentageChanceOfRain: number | null;
+  };
+  tomorrow4pm: {
+    temperature: number | null;
+    percentageChanceOfRain: number | null;
+  };
 };
+
 const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
   summary,
   collapsed = false,
 }) => {
-  const [weatherData, setWeatherData] = useState<{
-    temperatureToday9am: number | null;
-    likelihoodOfRainToday9am: number | null;
-    temperatureToday4pm: number | null;
-    likelihoodOfRainToday4pm: number | null;
-    temperatureTomorrow9am: number | null;
-    likelihoodOfRainTomorrow9am: number | null;
-    temperatureTomorrow4pm: number | null;
-    likelihoodOfRainTomorrow4pm: number | null;
-  }>({
-    temperatureToday9am: null,
-    likelihoodOfRainToday9am: null,
-    temperatureToday4pm: null,
-    likelihoodOfRainToday4pm: null,
-    temperatureTomorrow9am: null,
-    likelihoodOfRainTomorrow9am: null,
-    temperatureTomorrow4pm: null,
-    likelihoodOfRainTomorrow4pm: null,
-  });
+  const [weatherDataPoints, setWeatherDataPoints] = useState<WeatherDataPoints>(
+    {
+      today9am: {
+        temperature: null,
+        percentageChanceOfRain: null,
+      },
+      today4pm: {
+        temperature: null,
+        percentageChanceOfRain: null,
+      },
+      tomorrow9am: {
+        temperature: null,
+        percentageChanceOfRain: null,
+      },
+      tomorrow4pm: {
+        temperature: null,
+        percentageChanceOfRain: null,
+      },
+    }
+  );
 
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -91,10 +82,12 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
   useEffect(() => {
     async function fetchWeatherData() {
       if (apiKey === undefined || process.env.REACT_APP_USE_MOCKS === "true") {
-        console.log("--useMocks set");
+        console.log(apiKey);
+        console.log(process.env.REACT_APP_USE_MOCKS);
         let londonData = mockData;
-        let dataPoints = getWeatherDataPoints(londonData);
-        setWeatherData(dataPoints);
+        let dataPoints = transformWeatherData(londonData);
+        console.log(dataPoints);
+        setWeatherDataPoints(dataPoints);
 
         setIsLoading(false);
         setErrorMessage(null);
@@ -115,14 +108,8 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
             // Data is less than 4 hours old, use cached data
             console.log("Using cached weather data");
 
-            // for testing
-            let londonData = mockData;
-            let dataPoints = getWeatherDataPoints(londonData);
-            setWeatherData(dataPoints);
-
-            // const parsedData = JSON.parse(cachedWeatherData);
-            // let dataPoints = getWeatherDataPoints(parsedData);
-            // setWeatherData(dataPoints);
+            const parsedData = JSON.parse(cachedWeatherData);
+            setWeatherDataPoints(parsedData);
 
             setIsLoading(false);
             setErrorMessage(null);
@@ -134,17 +121,16 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
         // If cached data is not available or is older than 4 hour, fetch new data
         console.log("FETCHING WEATHER DATA");
         const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/forecast?q=London,GB&appid=${apiKey}&units=metric` // Request temperature in Celsius
+          `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=London&days=2&aqi=no&alerts=no`
         );
 
         if (!response.ok) {
           throw new Error("API request failed");
         }
-
         const data = await response.json();
 
-        const dataPoints = getWeatherDataPoints(data);
-        setWeatherData(dataPoints);
+        const dataPoints = transformWeatherData(data);
+        setWeatherDataPoints(dataPoints);
 
         localStorage.setItem("weatherData", JSON.stringify(dataPoints));
 
@@ -164,7 +150,7 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
     fetchWeatherData();
   }, []);
 
-  console.log(weatherData);
+  console.log(weatherDataPoints);
 
   return (
     <Card>
@@ -182,31 +168,37 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
                     <h4>Weather Forecast</h4>
                   </TableCell>
                   <SummaryCell
-                    temperature={weatherData.temperatureToday9am ?? NaN}
+                    temperature={weatherDataPoints.today9am?.temperature ?? NaN}
                     percentageChance={
-                      weatherData.likelihoodOfRainToday9am ?? NaN
+                      weatherDataPoints.today9am?.percentageChanceOfRain ?? NaN
                     }
                     time="Today  (am)"
                   />
                   <SummaryCell
                     time="Today  (am)"
-                    temperature={weatherData.temperatureToday4pm ?? NaN}
+                    temperature={weatherDataPoints.today4pm?.temperature ?? NaN}
                     percentageChance={
-                      weatherData.likelihoodOfRainToday4pm ?? NaN
+                      weatherDataPoints.today4pm?.percentageChanceOfRain ?? NaN
                     }
                   />
                   <SummaryCell
                     time="Tomorrow  (am)"
-                    temperature={weatherData.temperatureTomorrow9am ?? NaN}
+                    temperature={
+                      weatherDataPoints.tomorrow9am?.temperature ?? NaN
+                    }
                     percentageChance={
-                      weatherData.likelihoodOfRainTomorrow9am ?? NaN
+                      weatherDataPoints.tomorrow9am?.percentageChanceOfRain ??
+                      NaN
                     }
                   />
                   <SummaryCell
                     time="Tomorrow  (pm)"
-                    temperature={weatherData.temperatureTomorrow4pm ?? NaN}
+                    temperature={
+                      weatherDataPoints.tomorrow4pm?.temperature ?? NaN
+                    }
                     percentageChance={
-                      weatherData.likelihoodOfRainTomorrow4pm ?? NaN
+                      weatherDataPoints.tomorrow4pm?.percentageChanceOfRain ??
+                      NaN
                     }
                   />
                 </TableRow>
@@ -249,16 +241,24 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
                   <TableRow>
                     <TableCell>Temp</TableCell>
                     <TemperatureCell
-                      temperature={weatherData.temperatureToday9am ?? NaN}
+                      temperature={
+                        weatherDataPoints.today9am?.temperature ?? NaN
+                      }
                     />
                     <TemperatureCell
-                      temperature={weatherData.temperatureToday4pm ?? NaN}
+                      temperature={
+                        weatherDataPoints.today4pm?.temperature ?? NaN
+                      }
                     />
                     <TemperatureCell
-                      temperature={weatherData.temperatureTomorrow9am ?? NaN}
+                      temperature={
+                        weatherDataPoints.tomorrow9am?.temperature ?? NaN
+                      }
                     />
                     <TemperatureCell
-                      temperature={weatherData.temperatureTomorrow4pm ?? NaN}
+                      temperature={
+                        weatherDataPoints.tomorrow4pm?.temperature ?? NaN
+                      }
                     />
                   </TableRow>
                   <TableRow>
@@ -266,22 +266,26 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
 
                     <RainCell
                       percentageChance={
-                        weatherData.likelihoodOfRainToday9am ?? NaN
+                        weatherDataPoints.today9am?.percentageChanceOfRain ??
+                        NaN
                       }
                     />
                     <RainCell
                       percentageChance={
-                        weatherData.likelihoodOfRainToday4pm ?? NaN
+                        weatherDataPoints.today4pm?.percentageChanceOfRain ??
+                        NaN
                       }
                     />
                     <RainCell
                       percentageChance={
-                        weatherData.likelihoodOfRainTomorrow9am ?? NaN
+                        weatherDataPoints.tomorrow9am?.percentageChanceOfRain ??
+                        NaN
                       }
                     />
                     <RainCell
                       percentageChance={
-                        weatherData.likelihoodOfRainTomorrow4pm ?? NaN
+                        weatherDataPoints.tomorrow4pm?.percentageChanceOfRain ??
+                        NaN
                       }
                     />
                   </TableRow>
