@@ -35,22 +35,21 @@ const TravelDisplay: React.FC<TravelDisplayProps> = ({
         const cachedTravelData = localStorage.getItem("travelData");
         const cachedTimestamp = localStorage.getItem("travelTimestamp");
 
-        // if (cachedTravelData && cachedTimestamp) {
-        //   const currentTime = new Date().getTime();
-        //   const lastFetchTime = new Date(parseInt(cachedTimestamp)).getTime();
-        //   const timeDifferenceInHours =
-        //     (currentTime - lastFetchTime) / (1000 * 60 * 60);
+        if (cachedTravelData && cachedTimestamp) {
+          const currentTime = new Date().getTime();
+          const lastFetchTime = new Date(parseInt(cachedTimestamp)).getTime();
+          const timeDifferenceInHours =
+            (currentTime - lastFetchTime) / (1000 * 60 * 60);
 
-        //   if (timeDifferenceInHours < 1) {
-        //     const parsedData = JSON.parse(cachedTravelData);
-        //     console.log(parsedData);
-        //     handleStatusUpdate(parsedData);
+          if (timeDifferenceInHours < 1) {
+            const parsedData = JSON.parse(cachedTravelData);
+            handleStatusUpdate(parsedData);
 
-        //     setIsLoading(false);
-        //     setErrorMessage(null);
-        //     return;
-        //   }
-        // }
+            setIsLoading(false);
+            setErrorMessage(null);
+            return;
+          }
+        }
 
         console.log("FETCHING TRAVEL DATA");
         const response = await fetch(
@@ -62,7 +61,6 @@ const TravelDisplay: React.FC<TravelDisplayProps> = ({
         }
 
         const data = await response.json();
-        console.log(data);
         const lineStatuses:
           | ((prevState: never[]) => never[])
           | { name: string; status: any; disruption: any }[] = [];
@@ -98,7 +96,6 @@ const TravelDisplay: React.FC<TravelDisplayProps> = ({
           }
         );
 
-        console.log(lineStatuses); // Output the statuses object
         handleStatusUpdate(lineStatuses);
 
         localStorage.setItem("travelData", JSON.stringify(lineStatuses));

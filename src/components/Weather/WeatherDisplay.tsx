@@ -22,7 +22,7 @@ import { transformWeatherData } from "./weather-utils";
 
 const mockData = require("./mock-weather-data-two.json");
 
-const apiKey = process.env.REACT_WEATHER_API_KEY;
+const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 interface WeatherDisplayProps {
   summary: boolean;
   collapsed?: boolean;
@@ -82,11 +82,8 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
   useEffect(() => {
     async function fetchWeatherData() {
       if (apiKey === undefined || process.env.REACT_APP_USE_MOCKS === "true") {
-        console.log(apiKey);
-        console.log(process.env.REACT_APP_USE_MOCKS);
         let londonData = mockData;
         let dataPoints = transformWeatherData(londonData);
-        console.log(dataPoints);
         setWeatherDataPoints(dataPoints);
 
         setIsLoading(false);
@@ -149,8 +146,6 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
 
     fetchWeatherData();
   }, []);
-
-  console.log(weatherDataPoints);
 
   return (
     <Card>
