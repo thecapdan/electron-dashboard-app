@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card, CardContent, CircularProgress, Typography } from "@mui/material";
 import { TableCell, Table, TableBody, TableRow } from "@mui/material";
 import SummaryCell from "./SummaryCell";
-import { deepEqual } from "../../common/utils";
+import { deepEqual, LocalStorageManager } from "../../common/utils";
 
 interface TravelDisplayProps {
   summary: boolean;
@@ -32,26 +32,21 @@ const TravelDisplay: React.FC<TravelDisplayProps> = ({
   useEffect(() => {
     async function fetchTravelData() {
       try {
-        const cachedTravelData = localStorage.getItem("travelData");
-        const cachedTimestamp = localStorage.getItem("travelTimestamp");
+        const cachedData = LocalStorageManager.checkLocalStorage<string>(
+          "Travel",
+          1
+        );
 
-        if (cachedTravelData && cachedTimestamp) {
-          const currentTime = new Date().getTime();
-          const lastFetchTime = new Date(parseInt(cachedTimestamp)).getTime();
-          const timeDifferenceInHours =
-            (currentTime - lastFetchTime) / (1000 * 60 * 60);
-
-          if (timeDifferenceInHours < 1) {
-            const parsedData = JSON.parse(cachedTravelData);
-            handleStatusUpdate(parsedData);
-
-            setIsLoading(false);
-            setErrorMessage(null);
-            return;
-          }
+        if (cachedData) {
+          const parsedData = JSON.parse(cachedData);
+          handleStatusUpdate(parsedData);
+          setIsLoading(false);
+          setErrorMessage(null);
+          console.log("TRAVEL: Using cached data");
+          return;
         }
 
-        console.log("FETCHING TRAVEL DATA");
+        console.log("TRAVEL: Fetching data from API");
         const response = await fetch(
           `https://api.tfl.gov.uk/line/mode/tube,dlr,elizabeth-line/status`
         );
@@ -98,11 +93,9 @@ const TravelDisplay: React.FC<TravelDisplayProps> = ({
 
         handleStatusUpdate(lineStatuses);
 
-        localStorage.setItem("travelData", JSON.stringify(lineStatuses));
-
-        localStorage.setItem(
-          "travelTimestamp",
-          new Date().getTime().toString()
+        LocalStorageManager.keepInLocalStorage(
+          "Travel",
+          JSON.stringify(lineStatuses)
         );
 
         setIsLoading(false);

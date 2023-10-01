@@ -24,7 +24,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
-    "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand --detectOpenHandles",
+    "test-debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
     "eject": "react-scripts eject",
     "dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
     "electron": "wait-on tcp:3000 && electron ."

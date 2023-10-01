@@ -4,6 +4,7 @@ import { TableCell, Table, TableBody, TableRow } from "@mui/material";
 import SummaryCell from "./SummaryCell";
 import axios from "axios";
 import { Fixture } from "./sport-utils";
+import { LocalStorageManager } from "../../common/utils";
 const mockData = require("./mock-sports-data.json");
 
 interface SportDisplayProps {
@@ -24,7 +25,6 @@ const SportDisplay: React.FC<SportDisplayProps> = ({
   useEffect(() => {
     const fetchFixtures = async () => {
       const apiUrl = "https://v3.football.api-sports.io/fixtures";
-
       if (process.env.REACT_APP_USE_MOCKS === "true") {
         setFixtures(mockData);
         setIsLoading(false);
@@ -33,21 +33,16 @@ const SportDisplay: React.FC<SportDisplayProps> = ({
       }
 
       try {
-        const cachedFixturesData = localStorage.getItem("fixturesData");
-        const cachedTimestamp = localStorage.getItem("fixturesTimestamp");
-
-        if (cachedFixturesData && cachedTimestamp) {
-          const currentTime = new Date();
-          const lastFetchTime = new Date(parseInt(cachedTimestamp));
-
-          if (lastFetchTime.getDate() === currentTime.getDate()) {
-            const parsedData = JSON.parse(cachedFixturesData);
-            setFixtures(parsedData.response);
-
-            setIsLoading(false);
-            setErrorMessage(null);
-            return;
-          }
+        const cachedData = LocalStorageManager.checkLocalStorage<Fixture[]>(
+          "Sports",
+          6
+        );
+        if (cachedData) {
+          setFixtures(cachedData);
+          setIsLoading(false);
+          setErrorMessage(null);
+          console.log("SPORTS: Using cached data");
+          return;
         }
 
         const currentDate = new Date().toISOString().split("T")[0];
@@ -56,7 +51,7 @@ const SportDisplay: React.FC<SportDisplayProps> = ({
         const oneWeekFromNowFormatted = oneWeekFromNow
           .toISOString()
           .split("T")[0];
-
+        console.log("SPORTS: Fetching data from API");
         const response = await axios.get(apiUrl, {
           headers: {
             "x-apisports-key": apiKey,
@@ -68,17 +63,14 @@ const SportDisplay: React.FC<SportDisplayProps> = ({
             to: oneWeekFromNowFormatted,
           },
         });
-        console.log(JSON.stringify(response));
         if (response.status === 200) {
           const fixturesData = response.data;
           // Process the fixtures data here
           setFixtures(fixturesData.response);
 
-          localStorage.setItem("fixturesData", JSON.stringify(fixturesData));
-
-          localStorage.setItem(
-            "fixturesTimestamp",
-            new Date().getTime().toString()
+          LocalStorageManager.keepInLocalStorage(
+            "Sports",
+            fixturesData.response
           );
         } else {
           console.error("Request failed with status:", response.status);

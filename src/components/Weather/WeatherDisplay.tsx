@@ -20,6 +20,8 @@ import { CircularProgress } from "@mui/material";
 
 import { transformWeatherData } from "./weather-utils";
 
+import { LocalStorageManager } from "../../common/utils";
+
 const mockData = require("./mock-weather-data-two.json");
 
 const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
@@ -92,31 +94,21 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
       }
 
       try {
-        const cachedWeatherData = localStorage.getItem("weatherData");
-        const cachedTimestamp = localStorage.getItem("weatherTimestamp");
-
-        if (cachedWeatherData && cachedTimestamp) {
-          const currentTime = new Date().getTime();
-          const lastFetchTime = new Date(parseInt(cachedTimestamp)).getTime();
-          const timeDifferenceInHours =
-            (currentTime - lastFetchTime) / (1000 * 60 * 60);
-
-          if (timeDifferenceInHours < 4) {
-            // Data is less than 4 hours old, use cached data
-            console.log("Using cached weather data");
-
-            const parsedData = JSON.parse(cachedWeatherData);
-            setWeatherDataPoints(parsedData);
-
-            setIsLoading(false);
-            setErrorMessage(null);
-
-            return;
-          }
+        const cachedData = LocalStorageManager.checkLocalStorage<string>(
+          "Weather",
+          1
+        );
+        if (cachedData) {
+          const parsedData = JSON.parse(cachedData);
+          setWeatherDataPoints(parsedData);
+          setIsLoading(false);
+          setErrorMessage(null);
+          console.log("WEATHER: Using cached data");
+          return;
         }
 
         // If cached data is not available or is older than 4 hour, fetch new data
-        console.log("FETCHING WEATHER DATA");
+        console.log("WEATHER: Fetching data from API");
         const response = await fetch(
           `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=London&days=2&aqi=no&alerts=no`
         );
@@ -129,11 +121,9 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({
         const dataPoints = transformWeatherData(data);
         setWeatherDataPoints(dataPoints);
 
-        localStorage.setItem("weatherData", JSON.stringify(dataPoints));
-
-        localStorage.setItem(
-          "weatherTimestamp",
-          new Date().getTime().toString()
+        LocalStorageManager.keepInLocalStorage(
+          "Weather",
+          JSON.stringify(dataPoints)
         );
 
         setIsLoading(false);
