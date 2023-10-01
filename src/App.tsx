@@ -18,7 +18,7 @@ export default function App() {
     };
 
   return (
-    <div style={{ width: "800px", height: "800px" }}>
+    <div style={{ width: "710px", height: "800px" }}>
       <AppBar position="static">
         <Toolbar sx={{ justifyContent: "center" }}>
           <Typography variant="h4" component="div" sx={{ flexGrow: 0 }}>

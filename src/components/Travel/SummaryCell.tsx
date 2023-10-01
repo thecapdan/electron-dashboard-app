@@ -14,15 +14,21 @@ interface SummaryCellProps {
 
 const SummaryCell: React.FC<SummaryCellProps> = ({ lineStatus }) => {
   return lineStatus && lineStatus.name ? (
-    <TableCell>
-      <span style={{ marginRight: "10px", marginLeft: "10px" }}>
+    <TableCell style={{ textAlign: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <img
           src={tubeImageMap[lineStatus.name]}
           style={tableStyle.img}
           alt={lineStatus.name}
         />
-      </span>
-      <h3>{lineStatus.status}</h3>
+        <p style={{ margin: "0px" }}>{lineStatus.status}</p>
+      </div>
     </TableCell>
   ) : (
     <TableCell></TableCell> // Render an empty TableCell when lineStatus.name is undefined

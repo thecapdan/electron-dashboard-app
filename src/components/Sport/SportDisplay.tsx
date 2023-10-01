@@ -100,8 +100,15 @@ const SportDisplay: React.FC<SportDisplayProps> = ({
           <Table>
             <TableBody>
               <TableRow>
-                <TableCell>
-                  <h4>Football Fixtures</h4>
+                <TableCell style={{ maxWidth: "40px" }}>
+                  <h4
+                    style={{
+                      maxWidth: "130px",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
+                    Football Fixtures
+                  </h4>
                 </TableCell>
                 {fixtures.slice(0, 2).map((fixture, index) => (
                   <SummaryCell key={index} fixture={fixture} />
